@@ -11,6 +11,9 @@ export declare namespace InlineKeyboardButton {
   interface AbstractInlineKeyboardButton {
     /** Label text on the button */
     text: string;
+    icon_custom_emoji_id?: string;
+    /** Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used. */
+    style?: "danger" | "success" | "primary";
   }
   export interface UrlButton extends AbstractInlineKeyboardButton {
     /** HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings. */
@@ -32,15 +35,13 @@ export declare namespace InlineKeyboardButton {
     /** If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account. */
     switch_inline_query: string;
   }
-  export interface SwitchInlineCurrentChatButton
-    extends AbstractInlineKeyboardButton {
+  export interface SwitchInlineCurrentChatButton extends AbstractInlineKeyboardButton {
     /** If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
 
     This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account. */
     switch_inline_query_current_chat: string;
   }
-  export interface SwitchInlineChosenChatButton
-    extends AbstractInlineKeyboardButton {
+  export interface SwitchInlineChosenChatButton extends AbstractInlineKeyboardButton {
     /** If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account. */
     switch_inline_query_chosen_chat: SwitchInlineQueryChosenChat;
   }
@@ -140,9 +141,7 @@ export declare namespace CallbackQuery {
 /** This object represents an incoming callback query from a callback button in an inline keyboard. If the button that originated the query was attached to a message sent by the bot, the field message will be present. If the button was attached to a message sent via the bot (in inline mode), the field inline_message_id will be present. Exactly one of the fields data or game_short_name will be present.
 
  NOTE: After the user presses a callback button, Telegram clients will display a progress bar until you call answerCallbackQuery. It is, therefore, necessary to react by calling answerCallbackQuery even if no notification to the user is needed (e.g., without specifying any of the optional parameters). */
-export type CallbackQuery =
-  | CallbackQuery.DataQuery
-  | CallbackQuery.GameQuery;
+export type CallbackQuery = CallbackQuery.DataQuery | CallbackQuery.GameQuery;
 
 /** This object represents a custom keyboard with reply options (see Introduction to bots for details and examples). Not supported in channels and for messages sent on behalf of a Telegram Business account. */
 export interface ReplyKeyboardMarkup {
@@ -167,6 +166,9 @@ export declare namespace KeyboardButton {
   interface Common {
     /** Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed */
     text: string;
+    icon_custom_emoji_id?: string;
+    /** Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used. */
+    style?: "danger" | "success" | "primary";
   }
   export interface RequestUsers extends Common {
     /** If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users_shared” service message. Available in private chats only. */
